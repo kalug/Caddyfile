@@ -1,0 +1,24 @@
+kalug.linux.org.tw {
+   gzip
+   log access.log
+   root /home
+
+   proxy / https://kalug.github.io/ {
+      transparent
+   }
+}
+
+kalug.linux.org.tw/~lloyd {
+  root /home/lloyd/public_html/
+}
+
+planet.python.org.tw {
+   root /home
+   proxy /~lloyd/ https://planet.python.org.tw/lloyd/public_html/ {
+      transparent
+   }
+   #rewrite {
+   #   regexp ^/~(\w+)/(.*)$
+   #   to /{1}/public_html/{2}
+   #}
+}
