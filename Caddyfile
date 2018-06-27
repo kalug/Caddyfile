@@ -1,24 +1,47 @@
 kalug.linux.org.tw {
-   gzip
-   log access.log
-   root /home
+  gzip
+  log access.log
+  root /home
 
-   proxy / https://kalug.github.io/ {
-      transparent
-   }
+  proxy / https://kalug.github.io/ {
+    transparent
+  }
+  # quicklink
+  redir /note https://hackmd.io/y1Y9-IzPQMeaNRL243elFQ
+  redir /telegram https://t.me/joinchat/Bqbim0F9EuW-GMUbYg9geA
+}
+
+kalug.linux.org.tw/mediaproxy {
+  root /var/www/lighttpd-www/kalugfeedjackstatic/
+}
+kalug.linux.org.tw/media {
+  root /var/www/lighttpd-www/kalugfeedjackstatic/adminmedia/
 }
 
 kalug.linux.org.tw/~lloyd {
   root /home/lloyd/public_html/
 }
 
+
+# pmwiki
+# need run php5-cgi first
+# $ php5-cgi -b 127.0.0.1:9001
+
+kalug.linux.org.tw/pmwiki {
+  fastcgi / 127.0.0.1:9001 php {
+    root /var/www/kalug/pmwiki
+  }
+}
+
+# planet.python.org.tw
 planet.python.org.tw {
-   root /home
-   proxy /~lloyd/ https://planet.python.org.tw/lloyd/public_html/ {
-      transparent
-   }
-   #rewrite {
-   #   regexp ^/~(\w+)/(.*)$
-   #   to /{1}/public_html/{2}
-   #}
+  proxy / http://planet.python.org.tw:8080/ {
+    transparent
+  }
+}
+planet.python.org.tw/mediaproxy {
+  root /var/www/lighttpd-www/pythonfeedjackstatic/
+}
+planet.python.org.tw/media {
+  root /var/www/lighttpd-www/pythonfeedjackstatic/adminmedia/
 }
